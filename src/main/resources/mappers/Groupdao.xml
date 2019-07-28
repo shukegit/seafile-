@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.seafile.microservice.group.dao.GroupDao">
+	
+	<select id="selectGroups" resultType="com.henu.seafile.microservice.group.pojo.Group">
+		SELECT
+		group_id,
+		group_name,
+		creator_name,
+		timestamp,
+		type,
+		parent_group_id
+		FROM
+		group
+	</select>
+	<select id="selectGroupByGroupId" resultType="com.henu.seafile.microservice.group.pojo.Group">
+		SELECT
+		group_id,
+		group_name,
+		creator_name,
+		timestamp,
+		type,
+		parent_group_id
+		FROM
+		group
+		WHERE
+		group_id=#{groupId}
+	</select>
+	<select id="selectGroupByGroupName" resultType="com.henu.seafile.microservice.group.pojo.Group">
+		SELECT
+		group_id,
+		group_name,
+		creator_name,
+		timestamp,
+		type,
+		parent_group_id
+		FROM
+		group
+		WHERE
+		group_name=#{groupName}
+	</select>
+	
+	
+</mapper>

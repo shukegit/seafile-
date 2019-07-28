@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.seafile.microservice.user.dao.UserDao">
+
+	<select id="selectAllUsers" resultType="com.henu.seafile.microservice.user.pojo.User">
+		SELECT
+		id, 
+		username,
+		password,
+		token,
+		isuseful,
+		createtime,
+		lastEditTime
+		FROM
+		tb_user
+	</select>
+	<select id="selectUser" resultType="com.henu.seafile.microservice.user.pojo.User">
+		SELECT
+		username,
+		password,
+		token,
+		isuseful,
+		createtime,
+		lastedittime
+		FROM
+		tb_user
+		WHERE
+		username=#{username}
+		AND
+		password=#{password}
+	</select>
+	
+	<select id="selectUserByToken" resultType="com.henu.seafile.microservice.user.pojo.User">
+		SELECT
+		username,
+		password,
+		token,
+		isuseful
+		FROM
+		tb_user
+		WHERE
+		token=#{token}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.henu.seafile.microservice.user.pojo.User">
+		INSERT INTO
+		tb_user
+		(
+			username,
+			password,
+			token,
+			isuseful,
+			createtime,
+			lastedittime
+		)
+		VALUES
+		(	
+			#{username},
+			#{password},
+			#{token},
+			#{isUseful},
+			#{createTime},
+			#{lastEditTime}
+		);
+	</insert>
+	
+	<update id="updateUser" parameterType="com.henu.seafile.microservice.user.pojo.User">
+		UPDATE tb_user
+		<set>
+			<if test="username != null">username=#{username},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="isUseful != null">isuseful=#{isUseful},</if>
+			<if test="createTime != null">createtime=#{createTime}</if>
+			<if test="lastEditTime != null">lastedittime=#{lastEditTime}</if>
+		WHERE
+		token=#{token}
+		</set>
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM
+		tb_user
+		WHERE
+		token=#{token}
+	</delete>
+	
+	<delete id="deleteUsers">
+		DELETE FROM
+		tb_user
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
