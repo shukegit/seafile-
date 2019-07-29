@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService{
 //			password = tempPasswd;
 //		}
 		User user = userDao.selectUser(username, password);
-		System.out.println("queryUser: " + username + password);
+		System.out.println("queryUser: " + username + "  " + password);
 
 		if(user != null) {
 			System.out.println(user.getUsername() + " " + user.getPassword() + " " + user.getToken());

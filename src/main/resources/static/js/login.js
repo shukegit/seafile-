@@ -34,6 +34,7 @@ $(function() {
 //					var arr = JSON.parse(data.data.data);
 //					console.log(arr.token);
 					setCookie("token",data.data.data);
+					alert("登录成功！您在其它设备的登录账号将被迫下线");
 					window.location.href = '/page/upload';
 				} else {
 					alert("登录失败:" + data.message);

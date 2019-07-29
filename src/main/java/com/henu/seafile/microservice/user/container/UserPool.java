@@ -29,18 +29,18 @@ public class UserPool {
 
 	public static boolean isDrop(PoolInfo poolInfo) {
 		String ip = (String)tablePool.get(poolInfo.getToken());
-		if (ip != null) {//找到了key
-			if(poolInfo.getIp() != ip) {
-				//同一台电脑不同的设备
+		if (ip != null) {//该用户又登录了
+			if(!poolInfo.getIp().equals(ip)) {
+				//不同的设备的登录(用户名一样，ip不一样)
 				return true;
 			}
 			return false;
 		}
 		return false;
 	}
-	public static boolean isExit(String token) {
-		String ip = (String)tablePool.get(token);
-		if (ip != null) {//找到了
+	public static boolean isExit(String token, String ip) {
+		String poolIp = (String)tablePool.get(token);
+		if (poolIp != null && poolIp.equals(ip)) {//找到了
 			return true;
 		}
 		return false;

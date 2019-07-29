@@ -72,21 +72,22 @@ public class MyFilterUtil implements Filter{
         ALLOWED_PATHS.add("/js/upload.js");
         ALLOWED_PATHS.add("/js/jquery-3.2.1.js");
         ALLOWED_PATHS.add("/page/logout");
-//        ALLOWED_PATHS.add("/page/upload");
-//        if(req.getSession().getAttribute("token") != null) {
-//        	ALLOWED_PATHS.add("/page/upload");
-//        }
+
+        if(req.getSession().getAttribute("token") != null) {
+        	ALLOWED_PATHS.add("/page/relogin");
+        }
+        
      
         String path = ((HttpServletRequest) request).getRequestURI();
         boolean allowedPath = ALLOWED_PATHS.contains(path);
-        System.out.println(path + " " + allowedPath +"(false过滤，ture通过)");
+//        System.out.println(path + " " + allowedPath +"(false过滤，ture通过)");
         //如果是登录登出的接口，则不需要处理
         if(allowedPath) {
-        	System.out.println("这里是不需要处理的url进入的方法:" + path);
+        	System.out.println("过滤器不进行过滤");
             chain.doFilter(req, rep);
         } else {
         	//不是登录登出的接口，则进行处理
-        	
+        	System.out.println("过滤器开始过滤");
         	
         	String token = req.getHeader("Authorization");//header方式
         	if(token == null) {
@@ -201,7 +202,7 @@ public class MyFilterUtil implements Filter{
 			
 			//首先区别是管理员还是用户
 			String admin = (String)request.getSession().getAttribute("admin");
-			System.out.println("admin:" + admin);
+			System.out.println("获得的admin:" + admin);
 			if(admin != null) {
 				//*************
 				//***管理员操作***
@@ -213,7 +214,7 @@ public class MyFilterUtil implements Filter{
 					resultInfo.setCode(ResponseCode.ERROR.getCode());
 					resultInfo.setMessage("用户授权认证没有通过!信息不正确");
 				}
-				System.out.printf("管理员： ");
+				System.out.printf("管理员操作： ");
 			} else {
 				//*************
 				//**非管理员操作***
@@ -248,7 +249,7 @@ public class MyFilterUtil implements Filter{
 					resultInfo.setMessage("用户授权认证没有通过!信息不正确");
 				} 
 			    System.out.println("users.size(数据库中通过token找用户):" + users.size());
-			    System.out.printf("用户： ");
+			    System.out.printf("用户操作： ");
 			}
 			System.out.println(resultInfo.getMessage());
 			return resultInfo;

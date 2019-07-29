@@ -21,6 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		urlList.add("/page/login");
+		urlList.add("/page/relogin");
 		urlList.add("/js/login.js");
 		urlList.add("/user/login");
 		urlList.add("/page/login2");

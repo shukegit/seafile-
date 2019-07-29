@@ -14,7 +14,7 @@ import com.henu.seafile.microservice.user.pojo.PoolInfo;
 
 
 /**
- * 这个类不会检查登录
+ * 检查每次请求的token和ip是否在hashTable中
  * @author Lenovo
  *
  */
@@ -24,38 +24,25 @@ public class MyInterceptorUtil implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
 
-		System.out.println("\n**************拦截器调用开始****************");
+		System.out.println("\n**************拦截器(检查用户是否在pool中)调用开始****************");
 
-		// 验证token
-//		try {
-//			String token = (String) request.getSession().getAttribute("token");
-//
-//			if (token == null) {
-//				System.out.println("拦截器拦截：获取token失败");
-//				response.sendRedirect("/page/login");
-//				return false;
-//			}
-//		} catch (Exception e) {
-//			System.out.println("拦截器拦截：获取token失败");
-//			response.sendRedirect("/page/login");
-//			return false;
-//		}
-		//从容器中检查是否已经登录过了，如果登录过了，则让以前登录的下线
+
+		//对所有操作都在pool中检查其token和ip，如果找到，说明有权限操作，如果没有，则没有权限操作
 		String token = (String) request.getSession().getAttribute("token");
 		String ip = (String) request.getSession().getAttribute("ip");
 		
 		PoolInfo poolInfo = new PoolInfo();
 		poolInfo.setToken(token);
 		poolInfo.setIp(ip);
-		boolean b = UserPool.isExit(token);
+		boolean b = UserPool.isExit(token, ip);
 		if(!b) {
 			System.out.println("拦截器拦截：userPool中没有该用户");
-			response.sendRedirect("/page/login");
+			response.sendRedirect("/page/relogin");
 			return false;
 		}
 		System.out.println("拦截器通过");
 
-		System.out.println("**************拦截器调用结束****************\n");
+		System.out.println("**************拦截器(检查用户是否在pool中)调用结束****************\n");
 		return true;
 	}
 

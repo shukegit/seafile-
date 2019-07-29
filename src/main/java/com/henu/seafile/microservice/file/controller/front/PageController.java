@@ -12,6 +12,11 @@ public class PageController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/relogin")
+	private String reLogin() {
+		return "relogin";
+	}
+	
 	@RequestMapping(value = "/upload")
 	private String upload() {
 		return "upload";
