@@ -28,6 +28,22 @@ public class UserPool {
 	}
 
 	public static boolean isDrop(PoolInfo poolInfo) {
+		
+		/**
+		 * 同一个会话只能登录一个账户，因为下一个用户登录时存放在session中的token会将前一个token替换掉，因此对于
+		 * 一个浏览器登录好几个用户这种情况，session中只会存放最后一个用户的token，而pool中却存放了好几个人的信息。
+		 * 解决方案是：每次都遍历map，得到values，在values中找是否存在和后一个登录相同的ip，如果有，删除当前value所在
+		 * 的map
+		 */
+		for(Map.Entry<String, Object> map : tablePool.entrySet()) {
+//			System.out.println(map.getValue() + "<---->" + poolInfo.getIp());
+			if(map.getValue().equals(poolInfo.getIp())) tablePool.remove(map.getKey());
+//			System.out.println("删除后的人数" + tablePool.size());
+		}
+		
+		/**
+		 * 比较不同ip的登录情况
+		 */
 		String ip = (String)tablePool.get(poolInfo.getToken());
 		if (ip != null) {//该用户又登录了
 			if(!poolInfo.getIp().equals(ip)) {

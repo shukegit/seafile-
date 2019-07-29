@@ -1,10 +1,12 @@
 package com.henu.seafile.microservice.user.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -203,6 +205,21 @@ public class UserController {
 		String token = (String)request.getSession().getAttribute("token");
 		String ip = (String)request.getSession().getAttribute("ip");
 		
+		
+		//获取session  
+		HttpSession   session   =   request.getSession();    
+		// 获取session中所有的键值  
+		Enumeration<String> attrs = session.getAttributeNames();  
+		// 遍历attrs中的
+		while(attrs.hasMoreElements()) {
+		// 获取session键值  
+		    String name = attrs.nextElement().toString();
+		    // 根据键值取session中的值  
+		    Object vakue = session.getAttribute(name);
+		    // 打印结果 
+		    System.out.println("------" + name + ":" + vakue +"--------\n");
+		}
+	
 		PoolInfo poolInfo = new PoolInfo();
 		poolInfo.setToken(token);
 		poolInfo.setIp(ip);
