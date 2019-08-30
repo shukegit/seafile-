@@ -55,6 +55,9 @@ public class UserPool {
 		return false;
 	}
 	public static boolean isExit(String token, String ip) {
+		if(token == null || ip == null) {
+			return false;
+		}
 		String poolIp = (String)tablePool.get(token);
 		if (poolIp != null && poolIp.equals(ip)) {//找到了
 			return true;

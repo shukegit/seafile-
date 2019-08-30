@@ -203,22 +203,16 @@ public class UserController {
 	private ServiceResponse<Map<String, Object>> logout(HttpServletRequest request) {
 
 		String token = (String)request.getSession().getAttribute("token");
-		String ip = (String)request.getSession().getAttribute("ip");
-		
-		
-		//获取session  
-		HttpSession   session   =   request.getSession();    
-		// 获取session中所有的键值  
-		Enumeration<String> attrs = session.getAttributeNames();  
-		// 遍历attrs中的
-		while(attrs.hasMoreElements()) {
-		// 获取session键值  
-		    String name = attrs.nextElement().toString();
-		    // 根据键值取session中的值  
-		    Object vakue = session.getAttribute(name);
-		    // 打印结果 
-		    System.out.println("------" + name + ":" + vakue +"--------\n");
-		}
+		String ip = (String)request.getSession().getAttribute("ip");	
+		//获取所有session  
+//		HttpSession   session   =   request.getSession();     
+//		Enumeration<String> attrs = session.getAttributeNames();  
+//		while(attrs.hasMoreElements()) {
+//
+//		    String name = attrs.nextElement().toString(); 
+//		    Object vakue = session.getAttribute(name);
+//		    System.out.println("------" + name + ":" + vakue +"--------\n");
+//		}
 	
 		PoolInfo poolInfo = new PoolInfo();
 		poolInfo.setToken(token);

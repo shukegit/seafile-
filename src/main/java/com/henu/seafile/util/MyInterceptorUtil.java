@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.henu.seafile.microservice.user.container.UserPool;
 import com.henu.seafile.microservice.user.pojo.PoolInfo;
+import com.henu.seafile.util.websocket.DWWebSocket;
 
 
 
@@ -37,7 +38,9 @@ public class MyInterceptorUtil implements HandlerInterceptor {
 		boolean b = UserPool.isExit(token, ip);
 		if(!b) {
 			System.out.println("拦截器拦截：userPool中没有该用户");
-			response.sendRedirect("/page/relogin");
+//			response.sendRedirect("/page/relogin");
+			DWWebSocket socket = new DWWebSocket();
+			socket.sendMessage("/page/relogin", token);
 			return false;
 		}
 		System.out.println("拦截器通过");

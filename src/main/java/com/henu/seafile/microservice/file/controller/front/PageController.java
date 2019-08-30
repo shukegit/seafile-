@@ -27,4 +27,11 @@ public class PageController {
 	private String login2() {
 		return "login2";
 	}
+	
+	@RequestMapping("/websocket")
+    public String webSocket(){
+        
+        return "mywebsocket";
+	}
+
 }

@@ -8,6 +8,82 @@ $(function() {
 	var createUserUrl = '/user/createuser';
 	var logoutUrl = '/user/logout';
 	var getUsersUrl = '/user/getusers';
+	
+	
+	
+	/**
+	 * 登录成功后在下一个页面保持持续的连接（websocket）
+	 */
+	webSocket = new WebSocket("ws://localhost:8080/seafilewebsocket/" + getCookie("token"));
+	
+	//连通之后的回调事件
+    webSocket.onopen = function() {
+    	console.log("已经连通了websocket");
+    };
+    
+    //接收后台服务端的消息
+    webSocket.onmessage = function (evt) {
+        var received_msg = evt.data;
+        console.log("数据已接收:" +received_msg);
+        var obj = JSON.parse(received_msg);
+        console.log("可以解析成json:"+obj);
+    }
+    
+    //向服务端发送消息
+    $('#sendMsg').click(function() {
+
+        var message = {
+//            "message":document.getElementById('text').value + "123",
+//            "username":document.getElementById('username').value + "456",
+            "to": "789"
+        };
+        webSocket.send(JSON.stringify(message));
+    });
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$("#upload").click(function() {
 
 		var filePath = '/Musics/';

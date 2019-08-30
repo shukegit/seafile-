@@ -72,6 +72,11 @@ public class MyFilterUtil implements Filter{
         ALLOWED_PATHS.add("/js/upload.js");
         ALLOWED_PATHS.add("/js/jquery-3.2.1.js");
         ALLOWED_PATHS.add("/page/logout");
+        
+        
+        ALLOWED_PATHS.add("/page/websocket");
+        ALLOWED_PATHS.add("/websocket/wsda");
+        ALLOWED_PATHS.add("/favicon.ico");
 
         if(req.getSession().getAttribute("token") != null) {
         	ALLOWED_PATHS.add("/page/relogin");
