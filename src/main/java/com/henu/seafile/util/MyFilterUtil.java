@@ -43,7 +43,10 @@ public class MyFilterUtil implements Filter{
 			throws IOException, ServletException {
 		System.out.println("\n**************过滤器调用开始****************");
 		System.out.printf("过滤器得到url:");
-		System.out.println(((HttpServletRequest) request).getRequestURI());
+		String urlString = ((HttpServletRequest) request).getRequestURI();
+		System.out.println(urlString);
+		
+		
 		
 		
 		
@@ -76,6 +79,12 @@ public class MyFilterUtil implements Filter{
         
         ALLOWED_PATHS.add("/page/websocket");
         ALLOWED_PATHS.add("/websocket/wsda");
+        //过滤器忽略websocketURL
+        if(urlString.contains("seafilewebsocket")) {
+			String ignoreSocketRequestUrlString = urlString;
+			ALLOWED_PATHS.add(ignoreSocketRequestUrlString);
+		}
+        
         ALLOWED_PATHS.add("/favicon.ico");
 
         if(req.getSession().getAttribute("token") != null) {
@@ -233,8 +242,10 @@ public class MyFilterUtil implements Filter{
 			    List<User> users = userDao.selectUserByToken(token);
 			    //在数据库中找到了，说明是用户
 			    if(users.size() > 0) {
-			    	//判断数据表中的字段，看是否被管理员授权了,如果授权了，则可以一下的操作
-					if(users.get(0).isUseful()) {
+			    	//判断数据表中的字段，看是否被管理员授权了,如果授权了，则可以以后的操作
+			    	boolean isUseful = users.get(0).isUseful();
+			    	System.out.println("用户是否被管理员限制：" + isUseful + "  " + users.get(0).getUsername() + " " + users.get(0).getPassword() + " " + users.get(0).getCreateTime());
+					if(isUseful) {
 						//检查和登录的时候保存的token一样不一样
 						//这边可能的情况是，别人拿到了用户token，然后没有经过登录就调用接口，所以验证它有权限以后要经过用户调用
 						if(token.equals(request.getSession().getAttribute("token"))) { 

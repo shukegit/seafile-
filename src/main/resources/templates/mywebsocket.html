@@ -87,7 +87,7 @@
                 console.log("获取了在线的名单"+onlineName.toString());
             }
             else{
-                setMessageInnerHTML(obj.fromusername+"对"+obj.tousername+"说："+obj.textMessage);
+                setMessageInnerHTML(obj.fromusername+"对"+obj.tousername+"说："+obj.textMessage);//这里和下面同时显示导致对话被打印了两次
             }
         };
  

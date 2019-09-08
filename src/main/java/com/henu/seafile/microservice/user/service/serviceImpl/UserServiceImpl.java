@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -69,7 +69,9 @@ public class UserServiceImpl implements UserService{
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setToken(token);
+		user.setUseful(true);//不知为何，数据库默认属性设置不成功
 		user.setCreateTime(new Date());
+		System.out.println(new Date());
 		System.out.println("创建用户成功:" + response.getData().get("data"));
 		System.out.println("用户名:" + username);
 		System.out.println("密码:" + password);

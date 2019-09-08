@@ -10,26 +10,40 @@ $(function() {
 	var getUsersUrl = '/user/getusers';
 	
 	
-	
+	var webSocket;
 	/**
 	 * 登录成功后在下一个页面保持持续的连接（websocket）
 	 */
-	webSocket = new WebSocket("ws://localhost:8080/seafilewebsocket/" + getCookie("token"));
+	if ("WebSocket" in window) {
+		webSocket = new WebSocket("ws://10.12.36.113:8080/seafilewebsocket/" + getCookie("token"));
+		
+		//连通之后的回调事件
+	    webSocket.onopen = function() {
+	    	console.log("已经连通了websocket");
+	    };
+	    
+	    //接收后台服务端的消息
+	    webSocket.onmessage = function (evt) {
+	        var received_msg = evt.data;
+	        console.log("数据已接收:" +received_msg);
+	        if(received_msg == "/page/relogin") {
+	        	window.location.href = "/page/relogin";
+	        }
+//	        var obj = JSON.parse(received_msg);
+//	        console.log("可以解析成json:"+obj);
+	    }
+	    //连接关闭的回调事件
+        webSocket.onclose = function() {
+        	
+            console.log("连接已关闭...");
+        };
+	    
+	    
+	} else {
+		console.log("您的浏览器不支持 WebSocket!");
+	}
 	
-	//连通之后的回调事件
-    webSocket.onopen = function() {
-    	console.log("已经连通了websocket");
-    };
-    
-    //接收后台服务端的消息
-    webSocket.onmessage = function (evt) {
-        var received_msg = evt.data;
-        console.log("数据已接收:" +received_msg);
-        var obj = JSON.parse(received_msg);
-        console.log("可以解析成json:"+obj);
-    }
-    
-    //向服务端发送消息
+	//向服务端发送消息
     $('#sendMsg').click(function() {
 
         var message = {
@@ -42,45 +56,10 @@ $(function() {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    
+    
+
 	
 	
 	

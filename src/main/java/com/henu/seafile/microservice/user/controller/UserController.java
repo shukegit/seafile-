@@ -1,12 +1,9 @@
 package com.henu.seafile.microservice.user.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +16,9 @@ import com.henu.seafile.microservice.user.container.UserPool;
 import com.henu.seafile.microservice.user.pojo.PoolInfo;
 import com.henu.seafile.microservice.user.pojo.User;
 import com.henu.seafile.microservice.user.service.UserService;
-import com.henu.seafile.util.GetIpUtil;
 import com.henu.seafile.util.HttpServletRequestUtil;
 import com.henu.seafile.util.NameAndPasswdUtil;
-import com.mysql.fabric.xmlrpc.base.Data;
+import com.henu.seafile.util.websocket.WebSocket;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -30,6 +26,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private WebSocket webSocket;
 
 	/**
 	 * 登录接口 (1)用户登录成功后将token存放进session, (2)管理员登录成功后将session和admin存入session
@@ -90,6 +88,7 @@ public class UserController {
 		poolInfo.setIp(ip);
 		if (UserPool.isDrop(poolInfo)) {
 			UserPool.pop(poolInfo);
+			webSocket.sendMessage("/page/relogin", token);
 		}
 		UserPool.push(poolInfo);
 		System.out.println("当前pool里的人数: " + UserPool.getLength());

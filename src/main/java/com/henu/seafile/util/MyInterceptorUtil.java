@@ -10,12 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.henu.seafile.microservice.user.container.UserPool;
 import com.henu.seafile.microservice.user.pojo.PoolInfo;
-import com.henu.seafile.util.websocket.DWWebSocket;
+import com.henu.seafile.util.websocket.WebSocket;
 
 
 
 /**
- * 检查每次请求的token和ip是否在hashTable中
+ * 检查每次请求的token和ip是否在hashMap中
+ * 注意：这儿的拦截是被动的，也就是客户端有请求，服务器才会去检查
  * @author Lenovo
  *
  */
@@ -38,9 +39,9 @@ public class MyInterceptorUtil implements HandlerInterceptor {
 		boolean b = UserPool.isExit(token, ip);
 		if(!b) {
 			System.out.println("拦截器拦截：userPool中没有该用户");
-//			response.sendRedirect("/page/relogin");
-			DWWebSocket socket = new DWWebSocket();
-			socket.sendMessage("/page/relogin", token);
+			response.sendRedirect("/page/relogin");
+//			WebSocket socket = new WebSocket();
+//			socket.sendMessage("/page/relogin", token);
 			return false;
 		}
 		System.out.println("拦截器通过");

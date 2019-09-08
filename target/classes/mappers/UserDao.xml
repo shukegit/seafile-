@@ -10,8 +10,8 @@
 		username,
 		password,
 		token,
-		isuseful,
-		createtime,
+		isUseful,
+		createTime,
 		lastEditTime
 		FROM
 		tb_user
@@ -21,9 +21,9 @@
 		username,
 		password,
 		token,
-		isuseful,
-		createtime,
-		lastedittime
+		isUseful,
+		createTime,
+		lastEditTime
 		FROM
 		tb_user
 		WHERE
@@ -37,7 +37,7 @@
 		username,
 		password,
 		token,
-		isuseful
+		isUseful
 		FROM
 		tb_user
 		WHERE
@@ -51,9 +51,9 @@
 			username,
 			password,
 			token,
-			isuseful,
-			createtime,
-			lastedittime
+			isUseful,
+			createTime,
+			lastEditTime
 		)
 		VALUES
 		(	
@@ -71,9 +71,9 @@
 		<set>
 			<if test="username != null">username=#{username},</if>
 			<if test="password != null">password=#{password},</if>
-			<if test="isUseful != null">isuseful=#{isUseful},</if>
-			<if test="createTime != null">createtime=#{createTime}</if>
-			<if test="lastEditTime != null">lastedittime=#{lastEditTime}</if>
+			<if test="isUseful != null">isUseful=#{isUseful},</if>
+			<if test="createTime != null">createTime=#{createTime}</if>
+			<if test="lastEditTime != null">lastEditTime=#{lastEditTime}</if>
 		WHERE
 		token=#{token}
 		</set>

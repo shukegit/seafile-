@@ -5,6 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/**
+ * ip拦截器组合token可以判断用户是否同时登录不同设备
+ * @author shuke
+ *
+ */
 public class IPIntercepterUtil implements HandlerInterceptor {
 	// 在访问接口前执行
 	@Override
@@ -28,7 +33,7 @@ public class IPIntercepterUtil implements HandlerInterceptor {
 //				return false;
 //			}
 //		}	
-		System.out.println("ip拦截器通过,已将ip存入session");
+		System.out.println("ip拦截器通过,已将ip存入session");//考虑下session同时放置很多ip会是什么结果
 		request.getSession().setAttribute("ip", ip);
 		
 		System.out.println("**************获取IP拦截器调用结束****************\n");
