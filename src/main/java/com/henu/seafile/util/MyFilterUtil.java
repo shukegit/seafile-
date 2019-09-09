@@ -70,10 +70,26 @@ public class MyFilterUtil implements Filter{
         //取消对登录登出的过滤
         final List<String> ALLOWED_PATHS = new ArrayList<>();
         ALLOWED_PATHS.add("/page/login");
+        ALLOWED_PATHS.add("/page/login2");
+        ALLOWED_PATHS.add("/js/login2.js");
+        ALLOWED_PATHS.add("/img/background.png");
+        ALLOWED_PATHS.add("/page/loginbefore");
         ALLOWED_PATHS.add("/user/login");
+        //××××××××××××××登录页面所需加载的资源×××××××××××××××××
         ALLOWED_PATHS.add("/js/login.js");
-        ALLOWED_PATHS.add("/js/upload.js");
         ALLOWED_PATHS.add("/js/jquery-3.2.1.js");
+        ALLOWED_PATHS.add("/js/login/demo-1.js");
+        ALLOWED_PATHS.add("/js/login/EasePack.min.js");
+        ALLOWED_PATHS.add("/js/login/html5.js");
+        ALLOWED_PATHS.add("/js/login/rAF.js");
+        ALLOWED_PATHS.add("/js/login/TweenLite.min.js");
+        ALLOWED_PATHS.add("/js/upload.js");
+        ALLOWED_PATHS.add("/css/login/component.css");
+        ALLOWED_PATHS.add("/css/login/demo.css");
+        ALLOWED_PATHS.add("/css/login/normalize.css");
+        ALLOWED_PATHS.add("/css/img/login_ico.png");
+        ALLOWED_PATHS.add("/css/img/demo-1-bg.jpg");
+        //**********************end*************************
         ALLOWED_PATHS.add("/page/logout");
         
         

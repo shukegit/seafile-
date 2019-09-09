@@ -11,6 +11,10 @@ public class PageController {
 	private String login() {
 		return "login";
 	}
+	@RequestMapping(value = "/loginbefore")
+	private String loginBefore() {
+		return "loginBefore";
+	}
 	
 	@RequestMapping(value = "/relogin")
 	private String reLogin() {

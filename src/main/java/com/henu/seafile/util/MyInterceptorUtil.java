@@ -27,8 +27,8 @@ public class MyInterceptorUtil implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
 
 		System.out.println("\n**************拦截器(检查用户是否在pool中)调用开始****************");
-
-
+		System.out.println("url:" + request.getRequestURI());
+		
 		//对所有操作都在pool中检查其token和ip，如果找到，说明有权限操作，如果没有，则没有权限操作
 		String token = (String) request.getSession().getAttribute("token");
 		String ip = (String) request.getSession().getAttribute("ip");

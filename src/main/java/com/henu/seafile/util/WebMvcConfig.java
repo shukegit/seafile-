@@ -25,8 +25,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		urlList.add("/page/websocket");
 		urlList.add("/websocket/wsda");
 		urlList.add("/favicon.ico");
+		//××××××××××××××登录页面所需加载的资源×××××××××××××××××
 		urlList.add("/js/login.js");
+		urlList.add("/js/login/demo-1.js");
+		urlList.add("/js/login/EasePack.min.js");
+		urlList.add("/js/login/html5.js");
+		urlList.add("/js/login/rAF.js");
+		urlList.add("/js/login/TweenLite.min.js");
+		urlList.add("/js/upload.js");
+	    urlList.add("/css/login/component.css");
+	    urlList.add("/css/login/demo.css");
+	    urlList.add("/css/login/normalize.css");
 		urlList.add("/user/login");
+		urlList.add("/css/img/login_ico.png");
+		urlList.add("/css/img/demo-1-bg.jpg");
+//		urlList.add("/error");//为啥多了个这个？？？
+		//**********************end*************************
 		urlList.add("/page/login2");
 		urlList.add("/js/login2.js");
 		urlList.add("/img/background.png");
