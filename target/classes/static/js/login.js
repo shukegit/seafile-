@@ -1,14 +1,6 @@
 $(function() {
 	var loginUrl = '/user/login';
 	
-	var ipUrl = '/user/'
-	
-	
-	
-	
-	
-	
-	
 	$('#login').click(function() {
 		var username = $('#username').val();
 		var password = $('#password').val();
@@ -35,7 +27,7 @@ $(function() {
 //					console.log(arr.token);
 					setCookie("token",data.data.data);
 					alert("登录成功！您在其它设备的登录账号将被迫下线");
-					window.location.href = '/page/upload';
+					window.location.href = '/page/main';
 				} else {
 					alert("登录失败:" + data.message);
 				}

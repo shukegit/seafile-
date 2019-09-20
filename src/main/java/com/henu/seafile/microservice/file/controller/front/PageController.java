@@ -26,6 +26,11 @@ public class PageController {
 		return "upload";
 	}
 	
+	@RequestMapping(value = "/main")
+	private String main() {
+		return "main";
+	}
+	
 	
 	@RequestMapping(value = "/login2")
 	private String login2() {

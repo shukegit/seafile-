@@ -60,11 +60,6 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 
-		<dependency><!--添加MySQL驱动依赖 -->
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 		<dependency><!--添加Test依赖 -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -79,21 +74,18 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.40</version>
-		</dependency>
+			</dependency>
 		<!-- 加密 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.11</version>
-		</dependency>
+			</dependency>
 
 		<!-- servlet web -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
+			</dependency>
 		<!-- 文件上传 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
